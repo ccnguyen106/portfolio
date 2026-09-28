@@ -4,3 +4,21 @@ body {
 	 */
   font: 100%/1.5 system-ui;
 }
+.paper {
+  /* US Letter Dimensions */
+  width: 8.5in;
+  min-height: 11in;
+
+  /* Standard 0.5-inch page margin */
+  padding: 0.5in;
+
+  /* Ensures padding does not expand the box beyond 8.5in x 11in */
+  box-sizing: border-box;
+
+  /* Centers the sheet on the screen */
+  margin: 20px auto;
+
+  /* Paper styling */
+  background: white;
+  border: 1px solid #d1d5db;
+}
