@@ -6,7 +6,6 @@
     <title>Christopher's Contact</title>
 </head>
 <body>
-    <h1>Contact</h1>
     <nav>
         <ul>
             <li><a href="../index.html">Home</a></li>
@@ -15,5 +14,21 @@
             <li><a href="https://github.com/ccnguyen106" target="_blank">GitHub</a></li>
         </ul>
     </nav>
+
+    <h1>Contact</h1>
+    <form action="mailto:chn058@ucsd.edu" method="POST" enctype="text/plain">
+        <label>
+            Email
+            <input name="email" type="email">
+        </label>
+        <label>
+            Subject
+            <input name="subject">
+        </label>
+        <label>
+            Body
+            <textarea name="body"></textarea>
+        </label>
+        <button type="submit"></button>   
 </body>
 </html>
