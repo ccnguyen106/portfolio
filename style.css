@@ -1,69 +1,85 @@
-body {
-  /* Set line height to 1.5 times the font size
-	   and use the OS’s UI font as the website font
-	 */
-  font: 100%/1.5 system-ui;
-}
-
+/* Step 4.1: Root Theme & System Colors */
 :root {
   --color-accent: oklch(66.111% 0.00191 323.759);
+  color-scheme: light dark;
 }
 
 html {
   accent-color: var(--color-accent);
 }
 
+body {
+  font: 100%/1.5 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+}
+
+/* Step 4.3: Dark Mode Switcher Positioning */
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  white-space: nowrap;
+}
+
+/* Base Layout Container */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.0;
+  text-wrap: balance;
+}
+
+/* Navigation */
 nav {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-color: oklch(80% 3% 200);
-}
-
-nav ul {
-    display: contents;
-}
-
-nav li {
-    display: contents;
-    list-style: none;
+  --border-color: oklch(50% 10% 200 / 40%);
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
 }
 
 nav a {
-    flex: 1;
-    text-align: center;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 nav a.current {
-    color: #000;
-    border-bottom: 5px solid oklch(80% 3% 200);
-    padding-bottom: 0.1em;
+  border-bottom: 5px solid oklch(60% 0.2 250);
+  background-color: color-mix(in oklch, oklch(60% 0.2 250), canvas 85%);
+  padding-bottom: calc(0.5em - 2px);
 }
 
 nav a:hover {
   border-bottom: 5px solid var(--color-accent);
-  background-color: oklch(from var(--color-accent) 85% c h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   padding-bottom: calc(0.5em - 2px);
 }
 
-.container {
-      width: 100%; 
-      max-width: 800px; 
-      margin: 0 auto; 
-      padding: 20px;
-  }
-
-  img {
-      max-width: 100%;
-      height: auto;
-  }
+/* Form Styles & Font Inheritance */
+input, textarea, button, select {
+  font-family: inherit;
+  font-size: inherit;
+}
 
 form {
   display: grid;
@@ -84,16 +100,11 @@ button {
   grid-column: 1 / -1;
 }
 
+/* Projects Grid */
 .projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
   gap: 1.5em;
-}
-
-.projects article img {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 .projects article {
@@ -103,33 +114,26 @@ button {
   gap: 1em;
 }
 
+.projects article img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .projects article h2 {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.0;
-  text-wrap: balance;
-}
-
-/* Container & Page Base */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-}
-
 /* Resume Paper Sheet Layout */
 .resume-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: color-mix(in srgb, canvas, canvastext 4%);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 3rem 3.5rem;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   margin-top: 1.5rem;
 }
 
-/* Header */
 .resume-header {
   text-align: center;
   margin-bottom: 2.25rem;
@@ -140,17 +144,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 0.5rem 0;
-  color: #111827;
 }
 
 .contact-links {
   font-size: 0.95rem;
-  color: #6b7280;
   margin: 0;
 }
 
 .contact-links a {
-  color: #2563eb;
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.15s ease;
@@ -158,12 +160,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact-links a:hover {
   text-decoration: underline;
-  color: #1d4ed8;
 }
 
 .contact-links .sep {
   margin: 0 0.5rem;
-  color: #d1d5db;
+  opacity: 0.5;
 }
 
 .resume-section {
@@ -175,8 +176,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  color: #1f2937;
-  border-bottom: 1.5px solid #e5e7eb;
+  border-bottom: 1.5px solid var(--border-color);
   padding-bottom: 0.35rem;
   margin: 0 0 1rem 0;
 }
@@ -194,36 +194,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .primary-row {
   font-weight: 600;
-  color: #111827;
   font-size: 1.05rem;
 }
 
 .sub-row {
   font-size: 0.95rem;
-  color: #4b5563;
   font-style: italic;
   margin-top: 0.15rem;
+  opacity: 0.8;
 }
 
 .meta {
   white-space: nowrap;
   font-weight: 400;
-  color: #6b7280;
   font-size: 0.9rem;
   font-style: normal;
+  opacity: 0.75;
 }
 
 .coursework {
   margin: 0.5rem 0 0 0;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #374151;
 }
 
 .entry ul {
   margin: 0.5rem 0 0 0;
   padding-left: 1.25rem;
-  color: #374151;
 }
 
 .entry ul li {
@@ -236,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
   body {
     background: transparent;
   }
-  nav, .page-title {
+  nav, .page-title, .color-scheme {
     display: none;
   }
   .resume-card {
@@ -258,11 +255,4 @@ h1, h2, h3, h4, h5, h6 {
   .meta {
     margin-bottom: 0.25rem;
   }
-}
-
-body {
-  background-color: #f3f4f6; /* Soft light gray canvas */
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #1f2937;
 }
