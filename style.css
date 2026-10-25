@@ -256,3 +256,31 @@ button {
     margin-bottom: 0.25rem;
   }
 }
+/* GitHub Profile Stats */
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+  gap: 1em;
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, canvas, canvastext 4%);
+  border: 1px solid var(--border-color, #ccc);
+  margin: 1.5rem 0;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 0;
+}
