@@ -284,3 +284,111 @@ button {
   font-weight: bold;
   margin: 0;
 }
+/* Lab 5: Visualizing categorical data with D3 */
+
+/* Step 0.1: Project Year Display */
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+
+.project-year {
+  font-family: Baskerville, 'Times New Roman', serif;
+  font-variant-numeric: oldstyle-nums;
+  color: color-mix(in srgb, canvastext, transparent 40%);
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* Step 1.1 & 1.2: Pie Plot Sizing */
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
+
+#projects-pie-plot path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+/* Step 5.1: Highlighting hovered wedge */
+#projects-pie-plot:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+
+/* Step 2.2 & 2.3: Layout for Pie Chart and Legend */
+.chart-container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  margin-bottom: 2em;
+}
+
+.legend {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  padding: 1.25em;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 300ms;
+}
+
+.legend .swatch {
+  width: 1em;
+  height: 1em;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Step 4.1: Search Bar */
+.searchBar {
+  width: 100%;
+  padding: 0.7em 1em;
+  margin-bottom: 2em;
+  font-size: 1rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: color-mix(in srgb, canvas, canvastext 2%);
+  color: inherit;
+}
+
+/* Step 5.2: Highlighting selected wedge */
+.selected {
+  --color: oklch(60% 45% 0) !important;
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
+.selected:is(path),
+path.selected {
+  fill: var(--color);
+}
+
+li.selected {
+  font-weight: bold;
+}
