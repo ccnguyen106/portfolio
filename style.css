@@ -304,6 +304,9 @@ button {
 /* Step 1.1 & 1.2: Pie Plot Sizing */
 #projects-pie-plot {
   max-width: 20em;
+  width: 100%;
+  flex: 1 1 20em;
+  min-width: 12em;
   margin-block: 2em;
   overflow: visible;
 }

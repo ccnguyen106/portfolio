@@ -2,7 +2,10 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 import { fetchJSON, renderProjects } from '../global.js';
 
 // Load project data
-const projects = await fetchJSON('../lib/projects.json');
+let projects = await fetchJSON('../lib/projects.json');
+if (!projects) {
+  projects = await fetchJSON(new URL('../lib/projects.json', import.meta.url).href);
+}
 const projectsContainer = document.querySelector('.projects');
 const searchInput = document.querySelector('.searchBar');
 const titleElement = document.querySelector('.projects-title');
@@ -20,6 +23,17 @@ let currentPieData = [];
 
 // Refactor all plotting into one function (Step 4.4)
 function renderPieChart(projectsGiven) {
+  // Clear previous SVG paths and legend items
+  let svg = d3.select('#projects-pie-plot');
+  svg.selectAll('path').remove();
+  let legend = d3.select('.legend');
+  legend.selectAll('li').remove();
+
+  if (!projectsGiven || projectsGiven.length === 0) {
+    currentPieData = [];
+    return;
+  }
+
   // Re-calculate rolled data (Step 3.1)
   let newRolledData = d3.rollups(
     projectsGiven,
@@ -32,12 +46,6 @@ function renderPieChart(projectsGiven) {
     return { value: count, label: year };
   });
   currentPieData = newData;
-
-  // Clear previous SVG paths and legend items
-  let svg = d3.select('#projects-pie-plot');
-  svg.selectAll('path').remove();
-  let legend = d3.select('.legend');
-  legend.selectAll('li').remove();
 
   if (newData.length === 0) {
     return;
